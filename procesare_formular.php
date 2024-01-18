@@ -1,12 +1,17 @@
-php
 <?php
-if(isset($_POST['nume']) && isset($_POST['email']) && isset($_POST['mesaj'])){
-  $nume = $_POST['nume'];
-  $email = $_POST['email'];
-  $mesaj = $_POST['mesaj'];
-  
-  // Aici puteți adăuga cod pentru a trimite mesajul primit prin email sau pentru a-l salva într-o bază de date
-  
-  echo "Mesajul a fost trimis cu succes!";
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+  $nume = $_POST["name"];
+  $email = $_POST["email"];
+  $mesaj = $_POST["message"];
+
+  $to = "sebastian.feneser@yahoo.com";
+  $subject = "BroBarbers";
+  $body = "Nume: " . $nume . "\nEmail: " . $email . "\nMesaj: " . $mesaj;
+
+  if (mail($to, $subject, $body)) {
+    echo "Mesajul a fost trimis cu succes.";
+  } else {
+    echo "Eroare la trimiterea mesajului.";
+  }
 }
 ?>
